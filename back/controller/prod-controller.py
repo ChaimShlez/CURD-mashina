@@ -27,12 +27,20 @@ def add_employee_route():
 def get_employees_route():
     employees = []
 
+
     res = q.get_employees()
     for hit in res['hits']['hits']:
         employees.append(hit['_source'])
     return employees
 
-
+@app.route("/getEmployee/<employeeId>", methods=["GET"])
+def get_employee_route(employeeId):
+    try:
+        res=q.get_employee(employeeId)
+        return res
+    except Exception as e:
+        logging.error(f"Failed to get employee {employeeId}: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 @app.route("/deleteEmployee/<employeeId>", methods=["DELETE"])
 def delete_employee_route(employeeId):
@@ -45,11 +53,13 @@ def delete_employee_route(employeeId):
 
 
 
-@app.route("/updateEmployee", methods=["UPDATE"])
+@app.route("/updateEmployee", methods=["PUT"])
 def update_employee_route():
     try:
         body = request.get_json()
-        # q.update_employee(body)
+        print('bodyyy',body)
+
+        q.update_employee(body)
 
         return jsonify({"status": "success", "deleted_id": body['id']})
     except Exception as e:

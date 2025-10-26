@@ -43,14 +43,14 @@ class Queries:
             logging.error(f"Error fetching documents from {self.index_name}: {e}")
             return None
 
-    def get_by_id(self,prod_id):
+    def get_employee(self,employee_id):
         try:
-            res=self.con.get(index=self.index_name,id=prod_id)
+            res=self.con.get(index=self.index_name,id=employee_id)
             return res['_source']
 
 
         except Exception as e:
-            logging.error(f'Error get by id{prod_id}')
+            logging.error(f'Error get by id{employee_id}')
 
 
     def delete_employee(self,employee_id):
@@ -60,23 +60,30 @@ class Queries:
         except Exception as e:
             logging.error(f'Deleted by {employee_id} filed')
 
-    # def update_employee(self,doc,employy):
-    #     try:
-    #     except Exception as a:
-    #         logging.error(f'Updateed by {}')
-    #     response = self.con.update(
-    #         index="my_index",
-    #         id=prod_id,
-    #         script={
-    #             "source": "ctx._source.title = params.title",
-    #             "params": {
-    #                 "title": doc
-    #             }
-    #         },
-    #     )
+    def update_employee(self,employee):
+
+        try:
+           employee_id=employee['id']
+           employee_body=employee
+           if self.is_exist(employee_id):
+               response = self.con.update(
+                   index=self.index_name,
+                   id=employee_id,
+                   doc=employee
+               )
+               self.con.indices.refresh(index=self.index_name)
+               print(response.body)
+
+               return response
+        except Exception as a:
+            logging.error(f'Updateed by {employee_id}')
+
 
     def is_exist(self, employee_id):
+        print("DSFDGNgbvdcasSADFDGV")
         try:
+            print('bodyyyy111', employee_id)
+
             return self.con.exists(index=self.index_name, id=employee_id)
         except Exception as e:
             logging.error(f"Exist check failed for {employee_id}: {e}")
