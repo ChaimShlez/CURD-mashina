@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e38032d-cb69-4913-adcb-8e4c7c394052" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back/_env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/controller/prod-controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/controller/prod-controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/dal/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/dal/queries.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +31,7 @@
     "Python.prod-controller.executor": "Run",
     "Python.queries.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "curd-back",
     "last_opened_file_path": "C:/Users/User/development/data/intel-data-processor",
     "settings.editor.selected.configurable": "editor.preferences.completion"
   }
