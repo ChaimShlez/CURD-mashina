@@ -1,18 +1,19 @@
 import { BrowserRouter } from "react-router-dom";
-
 import './index.css'
-import Login from './main/login/login'
+import Layout from "./layout/Layout";
+import { MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 
 function App() {
-
   return (
-    <>
-    <BrowserRouter>
-    
-    </BrowserRouter>
-       <Login/>
-    </>
-  )
+   <MantineProvider>
+     <Notifications />
+  <BrowserRouter>
+    <Layout />
+  </BrowserRouter>
+</MantineProvider>
+
+  );
 }
 
-export default App
+export default App;
