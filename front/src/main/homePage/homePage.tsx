@@ -1,14 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useEffect} from "react";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { FaTrash, FaUserEdit } from "react-icons/fa";
 import { Table } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-// import Login from "../login/login";
+import { useAtom } from "jotai";
+import { employeeAtom } from '../../jotai/jotai';
 
 interface Employee {
-  id: number;
+  id: string;
   name: string;
   role: string;
   salary: number;
@@ -18,7 +18,8 @@ interface Employee {
 export default function HomePage() {
   const navigate = useNavigate();
 
-  const [employees, setEmployees] = useState<Employee[]>([]);
+const [employees, setEmployees] = useAtom(employeeAtom);
+
 
   async function getEmployees() {
     try {
@@ -33,7 +34,7 @@ export default function HomePage() {
     getEmployees();
   }, []);
 
-  const deleteEmployee = async (employeeID: number) => {
+  const deleteEmployee = async (employeeID: string) => {
     try {
       const response = await axios.delete
         (`${import.meta.env.VITE_API_URL}/deleteEmployee/${employeeID}`,
