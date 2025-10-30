@@ -1,10 +1,14 @@
 import logging
 
-from flask import Flask, request, jsonify
-from back.dal.queries import Queries
+
+from flask import  request, jsonify ,Blueprint
+from back.dal.elastic.dal_employees_elastic import Queries
 from pydantic import BaseModel
 
-app = Flask(__name__)
+from back.utils.middleware import verify
+
+employee_bp = Blueprint('employee', __name__)
+
 q = Queries()
 
 
@@ -16,35 +20,43 @@ class EmployeeModel(BaseModel):
     isBonus: bool
 
 
-@app.route("/addEmployee", methods=["POST"])
+@employee_bp.route("/addEmployee", methods=["POST"])
 def add_employee_route():
+    if not verify():
+        return jsonify({"status": "error", "message": "No permission"})
     body = request.get_json()
     q.add_employee(body)
     return "OK"
 
 
-@app.route("/getEmployees", methods=["GET"])
+@employee_bp.route("/getEmployees", methods=["GET"])
 def get_employees_route():
+
     employees = []
 
-
+    if not verify():
+        return jsonify({"status": "error", "message": "No permission"})
     res = q.get_employees()
     for hit in res['hits']['hits']:
         employees.append(hit['_source'])
     return employees
 
-@app.route("/getEmployee/<employeeId>", methods=["GET"])
+@employee_bp.route("/getEmployee/<employeeId>", methods=["GET"])
 def get_employee_route(employeeId):
     try:
+        if not verify():
+            return jsonify({"status":"error","message":"No permission"})
         res=q.get_employee(employeeId)
         return res
     except Exception as e:
         logging.error(f"Failed to get employee {employeeId}: {e}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
-@app.route("/deleteEmployee/<employeeId>", methods=["DELETE"])
+@employee_bp.route("/deleteEmployee/<employeeId>", methods=["DELETE"])
 def delete_employee_route(employeeId):
     try:
+        if not verify():
+            return jsonify({"status": "error", "message": "No permission"})
         q.delete_employee(employeeId)
         return jsonify({"status": "success", "deleted_id": employeeId})
     except Exception as e:
@@ -53,20 +65,18 @@ def delete_employee_route(employeeId):
 
 
 
-@app.route("/updateEmployee", methods=["PUT"])
+@employee_bp.route("/updateEmployee", methods=["PUT"])
 def update_employee_route():
     try:
+        if not verify():
+            return jsonify({"status": "error", "message": "No permission"})
         body = request.get_json()
-        print('bodyyy',body)
 
         q.update_employee(body)
-
-        return jsonify({"status": "success", "deleted_id": body['id']})
+        return jsonify({"status": "success", "updated_id": body['id']})
     except Exception as e:
         logging.error(f"Failed to delete employee {body['id']}: {e}")
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)

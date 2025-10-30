@@ -1,38 +1,90 @@
-// import { useState } from "react"
+import { Button, PasswordInput, TextInput } from "@mantine/core";
+import axios from "axios";
+import { useState } from "react"
 
-export default function Login(){
-  // const[userName,setUserName]=useState<string>("")
+interface LoginProps {
+    close: () => void;
+}
 
-    return(
-        <div className="bg-green-200 h-screen p-4 flex  justify-center items-center ">
-        <div className="bg-green-300 p-8 w-72 h-96 flex flex-col  justify-center items-center gap-4 rounded-md">
-         
-      
-           <h3 className='text-cyan-900 font-mono text-lg  ' >
-          login
-        </h3>
-         <input
-          id="email"
-          type='email'
-          placeholder='Enter your email'
-           className='w-full h-9 border border-gray-400 px-3   rounded-md required '
+
+
+
+
+export default function Login({ close }: LoginProps) {
+    const [userName, setUserName] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
+
+
+    const login = async () => {
+        try {
+            const user = { userName, password };
+
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/login`, user,
+                {
+                    headers:
+                        { 'Content-Type': 'application/json' },
+                    withCredentials: true
+
+                }
+            );
+            const data = response.data;
+            console.log(data)
+
+            if (data.status === "success") {
+                alert(`login successfully!`);
+                close()
+            } else {
+                alert(`Error: ${data.message}`);
+            }
+        } catch (e: any) {
+            console.error("Error login:", e);
+            alert(`Error login: ${e}`);
+        }
+    };
+
+
+
+
+    return (
+        // <div className="bg-green-200  p-4 flex  justify-center items-center ">
+            <div className="bg-green-300 p-8  h-96 flex flex-col justify-evenly   gap-4 rounded-md">
+
+
+                <h3 className='text-cyan-900 font-mono text-lg  ' >
+                    login
+                </h3>
+                <TextInput
+                    placeholder="user name"
+                    label="user name"
+                    radius="md"
+                    size="md"
+                    withAsterisk
+                    required
+                    value={userName}
+                    onChange={(event) => setUserName(event.currentTarget.value)}
+                />
+
           
-          />
-          <input
-          id="password"
-          type='password'
-          placeholder='Enter your password'
-           className='w-full h-9 border border-gray-400 px-3 rounded-md required'
-          />
-          <button className='w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition'>
-            sing in
-          </button>
-        </div>
+          
+                <PasswordInput
+                   label="password"
+                    radius="md"
+                    size="md"
+                    withAsterisk
+                    required
+                    placeholder='Enter your password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button onClick={login} >
+                    sing in
+                </Button>
+            </div>
 
-       
 
-        
-      </div>
+
+
+        // </div>
 
     )
 };
