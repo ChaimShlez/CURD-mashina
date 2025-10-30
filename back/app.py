@@ -3,7 +3,7 @@ from controller import all_blueprints
 
 from flask_cors import CORS
 app = Flask(__name__)
-CORS(app,supports_credentials=True,origins=["http://localhost:5173","http://localhost:5174"])
+CORS(app,supports_credentials=True,origins=["http://localhost:5173","http://localhost:5175"])
 
 for bp in all_blueprints:
     app.register_blueprint(bp)

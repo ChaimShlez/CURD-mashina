@@ -6,6 +6,8 @@ import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import Login from "../login/login";
 import { useDisclosure } from "@mantine/hooks";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAtom, useSetAtom } from "jotai";
+import { employeeAtom } from "../../jotai/jotai";
 
 
 
@@ -14,6 +16,8 @@ export default function UpdateEmployee() {
     const location = useLocation();
     const employee = location.state.employee
     const navigate = useNavigate();
+    const setEmployees= useSetAtom(employeeAtom);
+
 
 
     const [id, setID] = useState<string>(employee.id);
@@ -28,10 +32,10 @@ export default function UpdateEmployee() {
 
     const saveEmployee = async () => {
         try {
-            
-            const employee = { id, name, role, salary, isBonus };
-      
-            const response = await axios.put(`${import.meta.env.VITE_API_URL}/updateEmployee`, employee,
+
+            const updatedEmployee  = { id, name, role, salary, isBonus };
+
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/updateEmployee`, updatedEmployee ,
                 {
                     headers:
                         { 'Content-Type': 'application/json' },
@@ -49,6 +53,11 @@ export default function UpdateEmployee() {
                     icon: <AiOutlineCheck />,
                     color: 'cyan'
                 })
+                
+                   setEmployees (prevEmployees=>prevEmployees.map(emp => emp.id === updatedEmployee.id ? updatedEmployee : emp))
+                   
+                      
+
                 navigate('/')
 
             }
@@ -73,8 +82,8 @@ export default function UpdateEmployee() {
 
     return (
         <div className="bg-green-200   p-4 flex  justify-center items-center ">
-            <Modal opened={opened} onClose={close}  size="sm" >
-                
+            <Modal opened={opened} onClose={close} size="sm" >
+
                 <Login close={close} />
             </Modal>
             <div className="bg-green-300 p-8 w-80  flex flex-col  justify-center items-center gap-4 rounded-md">
@@ -84,7 +93,7 @@ export default function UpdateEmployee() {
                     radius="md"
                     required
                     value={id}
-                    onChange={(event) => setID(event.currentTarget.value)}
+                    onChange={(event) => setID(event.target.value)}
                 />
                 <TextInput
                     placeholder="name"
@@ -92,7 +101,7 @@ export default function UpdateEmployee() {
                     radius="md"
                     required
                     value={name}
-                    onChange={(event) => setName(event.currentTarget.value)}
+                    onChange={(event) => setName(event.target.value)}
                 />
 
                 <TextInput
@@ -101,7 +110,7 @@ export default function UpdateEmployee() {
                     radius="md"
                     required
                     value={role}
-                    onChange={(event) => setRole(event.currentTarget.value)}
+                    onChange={(event) => setRole(event.target.value)}
                 />
                 <NumberInput
                     placeholder="salary"
