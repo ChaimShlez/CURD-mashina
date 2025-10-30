@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 from back.utils.config import *
 
 
-class Elastic_conn:
+class ElasticConn:
     def __init__(self):
         self.es: Elasticsearch= Elasticsearch(f'http://{ES_HOST}:9200')
         self.__check()
@@ -25,5 +25,5 @@ class Elastic_conn:
             time.sleep(2)
 
 if __name__ == "__main__":
-    conn = Elastic_conn()
+    conn = ElasticConn()
     print(conn.get_con())

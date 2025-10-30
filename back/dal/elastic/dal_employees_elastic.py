@@ -1,11 +1,11 @@
-from back.utils.elastic_service import Elastic_conn
+from back.utils.elastic_service import ElasticConn
 from back.dal.config import *
 import logging
 
 
 class Queries:
     def __init__(self):
-        self.con= Elastic_conn().get_con()
+        self.con= ElasticConn().get_con()
 
         self.index_name=INDEX_EMPLOYEES
         self.__create_index()

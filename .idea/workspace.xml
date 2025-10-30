@@ -5,14 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e38032d-cb69-4913-adcb-8e4c7c394052" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/back/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/controller/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/controller/auth_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/controller/employees_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/dal/sql/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/dal/sql/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/dal/sql/users_queries.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/dal/sql/users_sql_dal.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/logic/auth_logic.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/utils/middleware.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/utils/session.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/utils/sql_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/mashinaCURD.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mashinaCURD.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/controller/prod-controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/controller/prod-controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/dal/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/dal/queries.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/_env" beforeDir="false" afterPath="$PROJECT_DIR$/back/_env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/controller/prod-controller.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/dal/queries.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/dal/elastic/dal_employees_elastic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/utils/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/utils/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/utils/elastic_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/utils/elastic_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/main/addEmployee/AddEmployee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/addEmployee/AddEmployee.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/main/homePage/homePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/homePage/homePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/main/login/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/login/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/main/updateEmployee/UpdateEmployee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/updateEmployee/UpdateEmployee.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,17 +56,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.elastic_service.executor": "Run",
-    "Python.prod-controller.executor": "Run",
-    "Python.queries.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "curd-back",
-    "last_opened_file_path": "C:/Users/User/development/data/intel-data-processor",
-    "settings.editor.selected.configurable": "editor.preferences.completion"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.elastic_service.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.middleware.executor&quot;: &quot;Run&quot;,
+    &quot;Python.prod-controller.executor&quot;: &quot;Run&quot;,
+    &quot;Python.queries.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sql_sevice.executor&quot;: &quot;Run&quot;,
+    &quot;Python.users_sql_dal.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;jwt&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/development/data/mashinaCURD&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\development\data\mashinaCURD\back\dal\sql" />
+      <recent name="C:\Users\User\development\data\mashinaCURD\back\dal\elastic" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -58,8 +101,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/back/utils/elastic_service.py</url>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/back/utils/sql_service.py</url>
+          <line>18</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/back/controller/employees_controller.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

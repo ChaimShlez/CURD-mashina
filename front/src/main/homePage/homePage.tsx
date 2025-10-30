@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { FaTrash, FaUserEdit } from "react-icons/fa";
-import { Modal, Table } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import UpdateEmployee from "../updateEmployee/UpdateEmployee";
+import { Table } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 // import Login from "../login/login";
 
 interface Employee {
@@ -17,16 +16,13 @@ interface Employee {
 }
 
 export default function HomePage() {
-  // const navigate = useNavigate();
-  const [opened, { open, close }] = useDisclosure(false);
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+  const navigate = useNavigate();
 
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   async function getEmployees() {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/getEmployees`);
-      console.log(response.data);
       setEmployees(response.data);
     } catch (e) {
       console.error("Error fetching employees:", e);
@@ -39,7 +35,11 @@ export default function HomePage() {
 
   const deleteEmployee = async (employeeID: number) => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/deleteEmployee/${employeeID}`);
+      const response = await axios.delete
+        (`${import.meta.env.VITE_API_URL}/deleteEmployee/${employeeID}`,
+          { withCredentials: true }
+
+        );
 
       const data = response.data;
       setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== employeeID));
@@ -57,9 +57,9 @@ export default function HomePage() {
     }
   };
 
-  const openEditModal = (employee: Employee) => {
-    setSelectedEmployee(employee);
-    open();
+  const update = (employee: Employee) => {
+
+    navigate('/updateEmployee', { state: { employee } });
   };
 
 
@@ -77,37 +77,23 @@ export default function HomePage() {
         </div>
       </td>
       <td className="!border-2 !border-black text-center" onClick={() => deleteEmployee(employee.id)}>
-        <div className="flex justify-center  cursor-pointer hover:text-red-600">
+        <button className=" cursor-pointr hover:text-red-600">
           <FaTrash />
-        </div>
+        </button>
       </td>
       <td className="!border-2 !border-black text-center ">
-        <div className="flex justify-center  cursor-pointer hover:text-blue-600"
-          onClick={() => openEditModal(employee)}
+        <button className="  hover:text-blue-600"
+          onClick={() => update(employee)}
         >
           <FaUserEdit />
-        </div>
+        </button>
       </td>
     </tr>
   ));
 
   return (
 
-    <div className="bg-green-200 min-h-screen p-8">
-
-      <Modal opened={opened} onClose={close} title="Update Employee" size="sm" 
-      >
-        {selectedEmployee && (
-          <UpdateEmployee
-            employee={selectedEmployee}
-            onClose={()=>{
-              close()
-              getEmployees()
-            }}
-            
-          />
-        )}
-      </Modal>
+    <div className="bg-green-200 min-h-full p-8">
 
       <h1 className="text-3xl font-bold mb-6 text-center">Employees List</h1>
 
