@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7e38032d-cb69-4913-adcb-8e4c7c394052" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/back/logic/employee_logic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/controller/auth_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/controller/auth_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/controller/employees_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/controller/employees_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/dal/elastic/dal_employees_elastic.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/dal/elastic/dal_employees_elastic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/layout/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/layout/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/main/addEmployee/AddEmployee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/addEmployee/AddEmployee.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/main/homePage/homePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/homePage/homePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/main/login/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/login/login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/main/updateEmployee/UpdateEmployee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/main/updateEmployee/UpdateEmployee.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,8 +53,8 @@
     "Python.users_sql_dal.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "jotai",
-    "last_opened_file_path": "C:/Users/User/development/data/mashinaCURD",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/User/development/data/mongo",
     "settings.editor.selected.configurable": "editor.preferences.completion"
   }
 }]]></component>
@@ -86,8 +92,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/back/controller/employees_controller.py</url>
-          <line>70</line>
+          <line>73</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/back/controller/auth_controller.py</url>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/back/controller/employees_controller.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

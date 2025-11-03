@@ -1,12 +1,11 @@
-import { Button, Checkbox, Modal, NumberInput, TextInput } from "@mantine/core";
+import { Button, Checkbox, NumberInput, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
 import { useState } from "react";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import Login from "../login/login";
-import { useDisclosure } from "@mantine/hooks";
+
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAtom, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { employeeAtom } from "../../jotai/jotai";
 
 
@@ -16,7 +15,7 @@ export default function UpdateEmployee() {
     const location = useLocation();
     const employee = location.state.employee
     const navigate = useNavigate();
-    const setEmployees= useSetAtom(employeeAtom);
+    const setEmployees = useSetAtom(employeeAtom);
 
 
 
@@ -25,7 +24,6 @@ export default function UpdateEmployee() {
     const [role, setRole] = useState<string>(employee.role);
     const [salary, setSalary] = useState<number>(employee.salary);
     const [isBonus, setIsBonus] = useState<boolean>(employee.isBonus);
-    const [opened, { open, close }] = useDisclosure(false);
 
 
 
@@ -33,9 +31,9 @@ export default function UpdateEmployee() {
     const saveEmployee = async () => {
         try {
 
-            const updatedEmployee  = { id, name, role, salary, isBonus };
+            const updatedEmployee = { id, name, role, salary, isBonus };
 
-            const response = await axios.put(`${import.meta.env.VITE_API_URL}/updateEmployee`, updatedEmployee ,
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/updateEmployee`, updatedEmployee,
                 {
                     headers:
                         { 'Content-Type': 'application/json' },
@@ -53,18 +51,14 @@ export default function UpdateEmployee() {
                     icon: <AiOutlineCheck />,
                     color: 'cyan'
                 })
-                
-                   setEmployees (prevEmployees=>prevEmployees.map(emp => emp.id === updatedEmployee.id ? updatedEmployee : emp))
-                   
-                      
+
+                setEmployees(prevEmployees =>
+                    prevEmployees.map(emp => emp.id === updatedEmployee.id ? updatedEmployee : emp))
 
                 navigate('/')
 
             }
-            else if (data.message === "No permission") {
-                open()
-            }
-            else {
+           else {
                 notifications.show({
                     title: 'update employee',
                     message: `Error: ${data.message}`,
@@ -82,10 +76,7 @@ export default function UpdateEmployee() {
 
     return (
         <div className="bg-green-200   p-4 flex  justify-center items-center ">
-            <Modal opened={opened} onClose={close} size="sm" >
 
-                <Login close={close} />
-            </Modal>
             <div className="bg-green-300 p-8 w-80  flex flex-col  justify-center items-center gap-4 rounded-md">
                 <TextInput
                     placeholder="ID"

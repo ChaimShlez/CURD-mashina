@@ -1,11 +1,14 @@
 import axios from "axios";
-import { useEffect} from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { FaTrash, FaUserEdit } from "react-icons/fa";
-import { Table } from "@mantine/core";
+import { Button, Modal, Table, TextInput } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { employeeAtom } from '../../jotai/jotai';
+import { useDisclosure } from "@mantine/hooks";
+import Login from "../login/login";
+
 
 interface Employee {
   id: string;
@@ -17,8 +20,10 @@ interface Employee {
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("")
+  const [employees, setEmployees] = useAtom(employeeAtom);
+  const [opened, { open, close }] = useDisclosure(false);
 
-const [employees, setEmployees] = useAtom(employeeAtom);
 
 
   async function getEmployees() {
@@ -36,37 +41,94 @@ const [employees, setEmployees] = useAtom(employeeAtom);
 
   const deleteEmployee = async (employeeID: string) => {
     try {
-      const response = await axios.delete
-        (`${import.meta.env.VITE_API_URL}/deleteEmployee/${employeeID}`,
-          { withCredentials: true }
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/verify`,
+        { withCredentials: true }
+      );
+      const data = response.data
 
-        );
+      if (data.message === "No permission") {
+        open()
 
-      const data = response.data;
-      setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== employeeID));
-
-      if (data.status === "success") {
-
-
-        alert(`Employee ${data.deleted_id} deleted successfully!`);
       } else {
-        alert(`Error: ${data.message}`);
+
+        const response = await axios.delete
+          (`${import.meta.env.VITE_API_URL}/deleteEmployee/${employeeID}`,
+            { withCredentials: true }
+
+          );
+
+        const data = response.data;
+        setEmployees(prevEmployees => prevEmployees.filter(employee => employee.id !== employeeID));
+
+        if (data.status === "success") {
+
+
+          alert(`Employee ${data.deleted_id} deleted successfully!`);
+        } else {
+          alert(`Error: ${data.message}`);
+        }
       }
+
     } catch (e: any) {
       console.error("Error deleting employee:", e);
       alert(`Error deleting employee: ${e.message || e}`);
     }
   };
 
-  const update = (employee: Employee) => {
+  const update = async (employee: Employee) => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/verify`,
+        { withCredentials: true }
+      );
+      const data = response.data
 
-    navigate('/updateEmployee', { state: { employee } });
+      if (data.message === "No permission") {
+        open()
+
+      }
+      else if (data.message === "Have permission") {
+        navigate('/updateEmployee', { state: { employee } });
+      }
+    }
+    catch (e: any) {
+      alert(e.message)
+    }
+
   };
 
+  const addEmployee = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/verify`,
+        { withCredentials: true }
+
+      );
+      const data = response.data
+
+      if (data.message === "No permission") {
+        open()
+
+      }
+      else (
+        navigate('/addEmployee')
+
+      )
+    }
+    catch (e: any) {
+      alert(e.message);
+
+    }
+  }
 
 
 
-  const rows = employees.map((employee) => (
+  const searchEmployees = employees.filter(employee =>
+    employee.name.includes(search) || employee.role.includes(search)
+  )
+
+
+
+
+  const rows = searchEmployees.map((employee) => (
     <tr key={employee.id}>
       <td className="border-2 border-black text-center">{employee.id}</td>
       <td className="border-2 border-black text-center">{employee.name}</td>
@@ -94,7 +156,26 @@ const [employees, setEmployees] = useAtom(employeeAtom);
 
   return (
 
-    <div className="bg-green-200 min-h-full p-8">
+
+    <div className="bg-green-200 min-h-full p-12">
+      <Modal opened={opened} onClose={close} size="sm" >
+
+        <Login close={close} />
+      </Modal>
+
+      <div className="flex justify-around items-end">
+        <TextInput
+          placeholder="search"
+          label="search-bar"
+          radius="md"
+          required
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+        <Button onClick={addEmployee}>
+          Add employee
+        </Button>
+      </div>
 
       <h1 className="text-3xl font-bold mb-6 text-center">Employees List</h1>
 

@@ -23,8 +23,10 @@ class Queries:
 
     def add_employee(self,body:dict):
         try:
-            self.con.index(index=self.index_name, id=body["id"], document=body)
+            res= self.con.index(index=self.index_name, id=body["id"], document=body)
+
             self.con.indices.refresh(index=self.index_name)
+            return res
         except Exception as e:
             logging.error(f"Error insert body: {e}")
 
@@ -80,9 +82,7 @@ class Queries:
 
 
     def is_exist(self, employee_id):
-        print("DSFDGNgbvdcasSADFDGV")
         try:
-            print('bodyyyy111', employee_id)
 
             return self.con.exists(index=self.index_name, id=employee_id)
         except Exception as e:

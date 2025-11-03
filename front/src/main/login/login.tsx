@@ -1,6 +1,8 @@
 import { Button, PasswordInput, TextInput } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import axios from "axios";
 import { useState } from "react"
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 interface LoginProps {
     close: () => void;
@@ -31,10 +33,20 @@ export default function Login({ close }: LoginProps) {
             console.log(data)
 
             if (data.status === "success") {
-                alert(`login successfully!`);
+                notifications.show({
+                    title: 'login',
+                    message: `login successfully!`,
+                    icon: <AiOutlineCheck />,
+                    color: 'cyan'
+                })
                 close()
             } else {
-                alert(`Error: ${data.message}`);
+                notifications.show({
+                    title: 'login',
+                    message: `Error: ${data.message}`,
+                    icon: <AiOutlineClose />,
+                    color: 'red'
+                })
             }
         } catch (e: any) {
             console.error("Error login:", e);
@@ -47,39 +59,39 @@ export default function Login({ close }: LoginProps) {
 
     return (
         // <div className="bg-green-200  p-4 flex  justify-center items-center ">
-            <div className="bg-green-300 p-8  h-96 flex flex-col justify-evenly   gap-4 rounded-md">
+        <div className="bg-green-300 p-8  h-96 flex flex-col justify-evenly   gap-4 rounded-md">
 
 
-                <h3 className='text-cyan-900 font-mono text-lg  ' >
-                    login
-                </h3>
-                <TextInput
-                    placeholder="user name"
-                    label="user name"
-                    radius="md"
-                    size="md"
-                    withAsterisk
-                    required
-                    value={userName}
-                    onChange={(event) => setUserName(event.currentTarget.value)}
-                />
+            <h3 className='text-cyan-900 font-mono text-lg  ' >
+                login
+            </h3>
+            <TextInput
+                placeholder="user name"
+                label="user name"
+                radius="md"
+                size="md"
+                withAsterisk
+                required
+                value={userName}
+                onChange={(event) => setUserName(event.currentTarget.value)}
+            />
 
-          
-          
-                <PasswordInput
-                   label="password"
-                    radius="md"
-                    size="md"
-                    withAsterisk
-                    required
-                    placeholder='Enter your password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <Button onClick={login} >
-                    sing in
-                </Button>
-            </div>
+
+
+            <PasswordInput
+                label="password"
+                radius="md"
+                size="md"
+                withAsterisk
+                required
+                placeholder='Enter your password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button onClick={login} >
+                sing in
+            </Button>
+        </div>
 
 
 

@@ -21,16 +21,13 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login',methods=["POST"])
 def login():
-    if not verify():
-        return jsonify({"status": "error", "message": "No permission"})
-    data = request.get_json()
 
+    data = request.get_json()
     token = logic.login(data)
     if token:
         res=make_response(jsonify({"status":"success","message": "login"}))
         res.set_cookie('access_token', token, httponly=True, secure=False)
         print("Set-Cookie header:", res.headers.get("Set-Cookie"))
-
         return res
     else:
         return jsonify({"message": "login filed"})
@@ -38,10 +35,8 @@ def login():
 
 @auth_bp.route('/register',methods=["POST"])
 def add_user():
-    if not verify():
-        return jsonify({"status": "error", "message": "No permission"})
+
     data = request.get_json()
-    print("data",data)
     if  not users_queries.is_exist_register(data['userName']):
         users_queries.insert_user(data)
     else:
